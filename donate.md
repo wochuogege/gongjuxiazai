@@ -14,14 +14,14 @@ permalink: /donate/
 
 <div class="donate-methods">
   <div class="donate-card">
-    <h3>微信支付</h3>
+    <h3>微信打赏</h3>
     <div class="qr-code">
-      <p>微信扫码支付</p>
+      <img src="https://aini666.vvvv.ee/assets/images/WEIXIN.png">
     </div>
   </div>
   
   <div class="donate-card">
-    <h3>支付宝</h3>
+    <h3>支付宝打赏</h3>
     <div class="qr-code">
       <p>支付宝扫码支付</p>
     </div>
