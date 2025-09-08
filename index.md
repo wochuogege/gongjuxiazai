@@ -16,135 +16,209 @@ title: 首页
 
 ---
 
-## 最新Windows工具
+## 最新内容
 
-<div class="latest-tools">
-  {% assign latest_windows_tools = site.windows_tools | sort: 'date' | reverse | limit: 3 %}
-  {% if latest_windows_tools.size > 0 %}
-    {% for tool in latest_windows_tools %}
-    <div class="tool-item">
-      <h3><a href="{{ site.baseurl }}{{ tool.url }}">{{ tool.title }}</a></h3>
-      <div class="tool-meta">
-        <span class="tool-date">发布日期：{{ tool.date | date: "%Y-%m-%d" }}</span>
-        {% if tool.version %}<span class="tool-version">版本：{{ tool.version }}</span>{% endif %}
-      </div>
-      {% if tool.screenshot %}<div class="tool-screenshot"><img src="{{ site.baseurl }}/{{ tool.screenshot }}" alt="{{ tool.title }} 截图" loading="lazy"></div>{% endif %}
-      <div class="tool-excerpt">{{ tool.excerpt | strip_html | truncate: 150 }}</div>
-      <a href="{{ site.baseurl }}{{ tool.url }}" class="tool-more">查看详情</a>
+<div class="latest-content-container">
+  <div class="content-section windows-section">
+    <h2>最新Windows工具</h2>
+    <div class="content-grid">
+      {% assign latest_windows_tools = site.windows_tools | sort: 'date' | reverse | limit: 3 %}
+      {% if latest_windows_tools.size > 0 %}
+        {% for tool in latest_windows_tools %}
+          <div class="content-card">
+            {% if tool.screenshot %}
+              <div class="content-image">
+                <img src="{{ site.baseurl }}/{{ tool.screenshot }}" alt="{{ tool.title }} 截图" loading="lazy">
+              </div>
+            {% else %}
+              <div class="content-image placeholder">
+                <div class="placeholder-icon">🖥️</div>
+              </div>
+            {% endif %}
+            <div class="content-info">
+              <h3><a href="{{ site.baseurl }}{{ tool.url }}">{{ tool.title }}</a></h3>
+              <div class="content-meta">
+                <span class="content-date">{{ tool.date | date: "%Y年%m月%d日" }}</span>
+                {% if tool.version %}<span class="content-version">版本：{{ tool.version }}</span>{% endif %}
+              </div>
+              <div class="content-excerpt">
+                {{ tool.excerpt | strip_html | truncate: 80 }}
+              </div>
+              <a href="{{ site.baseurl }}{{ tool.url }}" class="content-more">查看详情 →</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-content">暂无Windows工具内容，敬请期待！</p>
+      {% endif %}
     </div>
-    {% endfor %}
-  {% else %}
-    <p>暂无Windows工具内容，敬请期待！</p>
-  {% endif %}
-  <div class="view-all"><a href="{{ site.baseurl }}/windows-tools/">查看全部Windows工具 &raquo;</a></div>
-</div>
+    <div class="view-all"><a href="{{ site.baseurl }}/windows-tools/">查看全部Windows工具 &raquo;</a></div>
+  </div>
 
----
-
-## 最新安卓APP
-
-<div class="latest-apps">
-  {% assign latest_android_apps = site.android_apps | sort: 'date' | reverse | limit: 3 %}
-  {% if latest_android_apps.size > 0 %}
-    {% for app in latest_android_apps %}
-    <div class="app-item">
-      <h3><a href="{{ site.baseurl }}{{ app.url }}">{{ app.title }}</a></h3>
-      <div class="app-meta">
-        <span class="app-date">发布日期：{{ app.date | date: "%Y-%m-%d" }}</span>
-        {% if app.version %}<span class="app-version">版本：{{ app.version }}</span>{% endif %}
-      </div>
-      {% if app.icon %}<div class="app-icon"><img src="{{ site.baseurl }}/{{ app.icon }}" alt="{{ app.title }} 图标" loading="lazy"></div>{% endif %}
-      <div class="app-excerpt">{{ app.excerpt | strip_html | truncate: 150 }}</div>
-      <a href="{{ site.baseurl }}{{ app.url }}" class="app-more">查看详情</a>
+  <div class="content-section android-section">
+    <h2>最新安卓APP</h2>
+    <div class="content-grid">
+      {% assign latest_android_apps = site.android_apps | sort: 'date' | reverse | limit: 3 %}
+      {% if latest_android_apps.size > 0 %}
+        {% for app in latest_android_apps %}
+          <div class="content-card">
+            {% if app.icon %}
+              <div class="content-image">
+                <img src="{{ site.baseurl }}/{{ app.icon }}" alt="{{ app.title }} 图标" loading="lazy">
+              </div>
+            {% else %}
+              <div class="content-image placeholder">
+                <div class="placeholder-icon">📱</div>
+              </div>
+            {% endif %}
+            <div class="content-info">
+              <h3><a href="{{ site.baseurl }}{{ app.url }}">{{ app.title }}</a></h3>
+              <div class="content-meta">
+                <span class="content-date">{{ app.date | date: "%Y年%m月%d日" }}</span>
+                {% if app.version %}<span class="content-version">版本：{{ app.version }}</span>{% endif %}
+              </div>
+              <div class="content-excerpt">
+                {{ app.excerpt | strip_html | truncate: 80 }}
+              </div>
+              <a href="{{ site.baseurl }}{{ app.url }}" class="content-more">查看详情 →</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="no-content">暂无安卓APP内容，敬请期待！</p>
+      {% endif %}
     </div>
-    {% endfor %}
-  {% else %}
-    <p>暂无安卓APP内容，敬请期待！</p>
-  {% endif %}
-  <div class="view-all"><a href="{{ site.baseurl }}/android-apps/">查看全部安卓APP &raquo;</a></div>
+    <div class="view-all"><a href="{{ site.baseurl }}/android-apps/">查看全部安卓APP &raquo;</a></div>
+  </div>
 </div>
 
 <style>
-  .latest-tools, .latest-apps {
-    margin-bottom: 30px;
+  .latest-content-container {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
   }
   
-  .tool-item, .app-item {
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    padding: 20px;
+  .content-section {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .content-section h2 {
+    font-size: 1.8rem;
+    margin-top: 0;
     margin-bottom: 20px;
-    background-color: #fff;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .content-card {
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
   
-  .tool-item:hover, .app-item:hover {
+  .content-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
   
-  .tool-item h3, .app-item h3 {
+  .content-image {
+    height: 160px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .content-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+  
+  .content-card:hover .content-image img {
+    transform: scale(1.05);
+  }
+  
+  .content-image.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .placeholder-icon {
+    font-size: 56px;
+  }
+  
+  .content-info {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content-info h3 {
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
   
-  .tool-item h3 a, .app-item h3 a {
+  .content-info h3 a {
     color: #333;
     text-decoration: none;
   }
   
-  .tool-item h3 a:hover, .app-item h3 a:hover {
+  .content-info h3 a:hover {
     color: #007bff;
   }
   
-  .tool-meta, .app-meta {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 15px;
+  .content-meta {
     color: #666;
-    font-size: 0.9rem;
+    font-size: 0.85em;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
   }
   
-  .tool-screenshot, .app-icon {
-    margin-bottom: 15px;
-  }
-  
-  .tool-screenshot img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-  
-  .app-icon img {
-    max-width: 80px;
-    height: auto;
-    border-radius: 16px;
-  }
-  
-  .tool-excerpt, .app-excerpt {
+  .content-excerpt {
     color: #555;
     margin-bottom: 15px;
-    line-height: 1.6;
+    flex: 1;
+    font-size: 0.95em;
+    line-height: 1.5;
   }
   
-  .tool-more, .app-more {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
+  .content-more {
+    color: #007bff;
     text-decoration: none;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9em;
   }
   
-  .tool-more:hover, .app-more:hover {
-    background-color: #0056b3;
+  .content-more:hover {
+    text-decoration: underline;
   }
   
   .view-all {
     text-align: center;
     margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eaeaea;
   }
   
   .view-all a {
@@ -157,14 +231,30 @@ title: 首页
     text-decoration: underline;
   }
   
+  .no-content {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+  }
+  
   @media (max-width: 768px) {
-    .tool-meta, .app-meta {
+    .latest-content-container {
       flex-direction: column;
-      gap: 5px;
+      gap: 20px;
     }
     
-    .tool-item, .app-item {
-      padding: 15px;
+    .content-section {
+      min-width: auto;
+    }
+    
+    .content-image {
+      height: 140px;
+    }
+    
+    .content-info {
+      padding: 12px;
     }
   }
 </style>
