@@ -1,0 +1,72 @@
+---
+permalink: /sitemap.xml
+sitemap: false
+hide_footer: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 首页 -->
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}/</loc>
+    <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <!-- 主要静态页面 -->
+  {% assign static_pages = site.pages | where_exp: "page", "page.sitemap != false" | where_exp: "page", "page.layout != 'windows_tool'" | where_exp: "page", "page.layout != 'android_app'" %}
+  {% for page in static_pages %}
+    {% unless page.url contains '404.html' or page.url contains '.css' or page.url contains '.js' or page.url contains '.xml' or page.url contains '/node_modules/' or page.url contains '/vendor/' %}
+    <url>
+      <loc>{{ site.url }}{{ site.baseurl }}{{ page.url }}</loc>
+      <lastmod>{{ page.date | default: site.time | date: "%Y-%m-%d" }}</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    {% endunless %}
+  {% endfor %}
+  
+  <!-- Windows工具文章 -->
+  {% for tool in site.windows_tools %}
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ tool.url }}</loc>
+    <lastmod>{{ tool.date | default: site.time | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  {% endfor %}
+  
+  <!-- 安卓APP文章 -->
+  {% for app in site.android_apps %}
+  <url>
+    <loc>{{ site.url }}{{ site.baseurl }}{{ app.url }}</loc>
+    <lastmod>{{ app.date | default: site.time | date: "%Y-%m-%d" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  {% endfor %}
+  
+  <!-- 分类页面 -->
+  {% if site.categories.size > 0 %}
+    {% for category in site.categories %}
+    <url>
+      <loc>{{ site.url }}{{ site.baseurl }}/categories/{{ category[0] | slugify }}/</loc>
+      <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.6</priority>
+    </url>
+    {% endfor %}
+  {% endif %}
+  
+  <!-- 标签页面 -->
+  {% if site.tags.size > 0 %}
+    {% for tag in site.tags %}
+    <url>
+      <loc>{{ site.url }}{{ site.baseurl }}/tags/{{ tag[0] | slugify }}/</loc>
+      <lastmod>{{ site.time | date: "%Y-%m-%d" }}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.5</priority>
+    </url>
+    {% endfor %}
+  {% endif %}
+</urlset>
