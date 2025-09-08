@@ -7,7 +7,8 @@
     <li class="nav-divider">|</li>
     
     {% for category in site.categories %}
-      <li><a href="{{ site.baseurl }}/categories/{{ category | first | slugify }}/">{{ category | first }}</a></li>
+      {% assign category_name = category | first %}
+      <li><a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">{{ category_name }}</a></li>
     {% endfor %}
   </ul>
 </nav>

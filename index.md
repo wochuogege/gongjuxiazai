@@ -10,11 +10,14 @@ title: 网站首页
 ## 各栏目最新内容
 
 {% for category in site.categories %}
+  {% assign category_name = category | first %}
+  {% assign category_posts = category | last %}
+  
   <section class="category-latest">
-    <h2><a href="{{ site.baseurl }}/categories/{{ category | first | slugify }}/">{{ category | first }}</a></h2>
+    <h2><a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">{{ category_name }}</a></h2>
     
     <div class="post-list">
-      {% assign sorted_posts = category[1] | sort: 'date' | reverse | slice: 0, 5 %}
+      {% assign sorted_posts = category_posts | sort: 'date' | reverse | slice: 0, 5 %}
       {% for post in sorted_posts %}
         <div class="post-item">
           <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
@@ -24,9 +27,9 @@ title: 网站首页
       {% endfor %}
     </div>
     
-    {% if category[1].size > 5 %}
+    {% if category_posts.size > 5 %}
       <div class="view-more">
-        <a href="{{ site.baseurl }}/categories/{{ category | first | slugify }}/">查看更多 {{ category | first }} 文章 →</a>
+        <a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">查看更多 {{ category_name }} 文章 →</a>
       </div>
     {% endif %}
   </section>
