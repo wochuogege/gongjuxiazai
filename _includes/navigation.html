@@ -136,6 +136,19 @@
       display: flex;
     }
     
+    /* 汉堡菜单动画 */
+    .nav-toggle.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .nav-toggle.active .bar:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    
+    .nav-toggle.active .bar:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    
     .nav-content {
       position: absolute;
       top: 100%;
@@ -193,6 +206,15 @@
     if (mobileNavToggle && navContent) {
       mobileNavToggle.addEventListener('click', function() {
         navContent.classList.toggle('active');
+        mobileNavToggle.classList.toggle('active'); // 为菜单按钮添加/移除active类以实现动画
+      });
+      
+      // 点击导航链接后关闭菜单
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          navContent.classList.remove('active');
+          mobileNavToggle.classList.remove('active');
+        });
       });
     }
     
