@@ -13,7 +13,8 @@ title: 所有栏目
       {% assign post_count = category_posts.size %}
       
       <div class="category-card">
-        <h2><a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">{{ category_name }}</a></h2>
+        {% assign category_str = category_name | stringify | remove: '"' %}
+        <h2><a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">{{ category_str }}</a></h2>
         <p class="category-count">{{ post_count }} 篇文章</p>
         
         {% assign sorted_posts = category_posts | sort: 'date' | reverse | slice: 0, 3 %}

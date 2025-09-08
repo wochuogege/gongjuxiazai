@@ -11,13 +11,8 @@ timezone: Asia/Shanghai # 设置时区为上海
 permalink: /posts/:year/:month/:day/:title/
 
 # 定义分类和标签的链接格式
-collections:
-  categories:
-    output: true
-    permalink: /categories/:path/
-  tags:
-    output: true
-    permalink: /tags/:path/
+# 注意：Jekyll内置了categories和tags系统，这里不再需要单独定义collections
+# 如果需要自定义集合，请使用其他名称避免冲突
 
 # 分页配置
 paginate: 10

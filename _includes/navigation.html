@@ -1,14 +1,15 @@
 <nav>
   <ul>
     <li><a href="{{ site.baseurl }}/">首页</a></li>
-    <li><a href="{{ site.baseurl }}/_categories/">所有栏目</a></li>
-    <li><a href="{{ site.baseurl }}/_tags/">所有标签</a></li>
+    <li><a href="{{ site.baseurl }}/categories/">所有栏目</a></li>
+    <li><a href="{{ site.baseurl }}/tags/">所有标签</a></li>
     
     <li class="nav-divider">|</li>
     
     {% for category in site.categories %}
-      {% assign category_name = category | first %}
-      <li><a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">{{ category_name }}</a></li>
-    {% endfor %}
+        {% assign category_name = category | first %}
+        {% assign category_str = category_name | stringify | remove: '"' %}
+        <li><a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">{{ category_str }}</a></li>
+      {% endfor %}
   </ul>
 </nav>

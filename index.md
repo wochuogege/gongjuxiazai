@@ -14,7 +14,8 @@ title: 网站首页
   {% assign category_posts = category | last %}
   
   <section class="category-latest">
-    <h2><a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">{{ category_name }}</a></h2>
+    {% assign category_str = category_name | stringify | remove: '"' %}
+    <h2><a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">{{ category_str }}</a></h2>
     
     <div class="post-list">
       {% assign sorted_posts = category_posts | sort: 'date' | reverse | slice: 0, 5 %}
@@ -29,7 +30,7 @@ title: 网站首页
     
     {% if category_posts.size > 5 %}
       <div class="view-more">
-        <a href="{{ site.baseurl }}/categories/{{ category_name | downcase | replace: ' ', '-' }}">查看更多 {{ category_name }} 文章 →</a>
+        <a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">查看更多 {{ category_str }} 文章 →</a>
       </div>
     {% endif %}
   </section>

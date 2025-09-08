@@ -7,27 +7,19 @@ title: 所有标签
   <h1>所有标签</h1>
   
   <div class="tag-cloud">
-    {% for tag in site.tags %}
-      {% assign tag_name = tag | first %}
-      {% assign tag_posts = tag | last %}
-      {% assign tag_size = tag_posts.size %}
-      {% assign max_size = 0 %}
-      {% for t in site.tags %}
-        {% if t[1].size > max_size %}
-          {% assign max_size = t[1].size %}
-        {% endif %}
+    {% if site.tags %}
+      {% for tag in site.tags %}
+        {% capture tag_name %}{{ tag | first }}{% endcapture %}
+        {% assign tag_posts = tag | last %}
+        {% assign tag_size = tag_posts.size %}
+        
+        <!-- 直接使用tag_name而不尝试额外的类型转换 -->
+        <a href="{{ site.baseurl }}/tag/{{ tag_name }}" style="font-size: 100%;">
+          {{ tag_name }} ({{ tag_size }})
+        </a>
       {% endfor %}
-      {% assign font_size = tag_size | times: 100 | divided_by: max_size %}
-      {% if font_size < 50 %}
-        {% assign font_size = 50 %}
-      {% endif %}
-      <a href="{% link _tags/{{ tag_name | downcase | replace: ' ', '-' }}.html %}" style="font-size: {{ font_size }}%;">
-        {{ tag_name }} ({{ tag_size }})
-      </a>
-    {% endfor %}
+    {% else %}
+      <p>暂无标签内容</p>
+    {% endif %}
   </div>
-  
-  {% if site.tags.size == 0 %}
-    <p>暂无标签内容，请在文章的 Front Matter 中添加 tags 字段来创建标签。</p>
-  {% endif %}
 </div>
