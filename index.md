@@ -28,8 +28,8 @@ title: 首页
           <div class="content-card">
             {% if tool.screenshot %}
               <div class="content-image">
-                <img src="{{ site.baseurl }}/{{ tool.screenshot }}" alt="{{ tool.title }} 截图" loading="lazy">
-              </div>
+              <img src="{{ tool.screenshot }}" alt="{{ tool.title }} 截图" loading="lazy">
+            </div>
             {% else %}
               <div class="content-image placeholder">
                 <div class="placeholder-icon">🖥️</div>
@@ -64,8 +64,8 @@ title: 首页
           <div class="content-card">
             {% if app.icon %}
               <div class="content-image">
-                <img src="{{ site.baseurl }}/{{ app.icon }}" alt="{{ app.title }} 图标" loading="lazy">
-              </div>
+              <img src="{{ app.icon }}" alt="{{ app.title }} 图标" loading="lazy">
+            </div>
             {% else %}
               <div class="content-image placeholder">
                 <div class="placeholder-icon">📱</div>

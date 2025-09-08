@@ -17,7 +17,7 @@ permalink: /android-apps/
       <div class="app-card">
         {% if app.icon %}
           <div class="app-image">
-            <img src="{{ site.baseurl }}/{{ app.icon }}" alt="{{ app.title }}" loading="lazy">
+            <img src="{{ app.icon }}" alt="{{ app.title }}" loading="lazy">
           </div>
         {% else %}
           <div class="app-image placeholder">

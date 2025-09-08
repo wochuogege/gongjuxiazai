@@ -17,7 +17,7 @@ permalink: /windows-tools/
       <div class="tool-card">
         {% if tool.screenshot %}
           <div class="tool-image">
-            <img src="{{ site.baseurl }}/{{ tool.screenshot }}" alt="{{ tool.title }}" loading="lazy">
+            <img src="{{ tool.screenshot }}" alt="{{ tool.title }}" loading="lazy">
           </div>
         {% else %}
           <div class="tool-image placeholder">
