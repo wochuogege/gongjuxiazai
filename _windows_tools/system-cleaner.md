@@ -6,7 +6,10 @@ date: 2023-11-01
 author: 工具君
 screenshot: /assets/images/system-cleaner.png
 system_requirements: Windows 7/8/10/11
-download_link: /downloads/system-cleaner-setup.exe
+baidu_link: https://pan.baidu.com/s/2example-tool-baidu
+baidu_pwd: def2
+quark_link: https://pan.quark.cn/s/example-tool-quark
+thunder_link: https://pan.xunlei.com/s/example-tool-xunlei
 features:
   - 清理系统垃圾文件
   - 优化系统性能

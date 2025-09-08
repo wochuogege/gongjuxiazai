@@ -42,11 +42,30 @@ layout: default
     </div>
   {% endif %}
   
-  {% if page.download_link %}
-    <div class="tool-download">
-      <a href="{{ page.download_link }}" class="download-button">立即下载</a>
+  <div class="tool-download">
+    <h2>下载链接</h2>
+    <div class="download-links">
+      {% if page.baidu_link %}
+        <a href="{{ page.baidu_link }}" class="download-button baidu" target="_blank">
+          <span class="download-icon">🔗</span>
+          <span>百度网盘</span>
+          {% if page.baidu_pwd %}<span class="password">{{ page.baidu_pwd }}</span>{% endif %}
+        </a>
+      {% endif %}
+      {% if page.quark_link %}
+        <a href="{{ page.quark_link }}" class="download-button quark" target="_blank">
+          <span class="download-icon">🔗</span>
+          <span>夸克网盘</span>
+        </a>
+      {% endif %}
+      {% if page.thunder_link %}
+        <a href="{{ page.thunder_link }}" class="download-button thunder" target="_blank">
+          <span class="download-icon">⚡</span>
+          <span>迅雷网盘</span>
+        </a>
+      {% endif %}
     </div>
-  {% endif %}
+  </div>
 </div>
 
 <style>
@@ -94,22 +113,63 @@ layout: default
   }
   
   .tool-download {
-    text-align: center;
     margin: 40px 0;
   }
   
+  .tool-download h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .download-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  
   .download-button {
-    display: inline-block;
-    padding: 12px 30px;
-    background-color: #0366d6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
     color: white;
     text-decoration: none;
     border-radius: 6px;
     font-weight: 500;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    justify-content: center;
+  }
+  
+  .download-button.baidu {
+    background-color: #2176ff;
+  }
+  
+  .download-button.quark {
+    background-color: #ff5a00;
+  }
+  
+  .download-button.thunder {
+    background-color: #ff3e00;
   }
   
   .download-button:hover {
-    background-color: #0256c1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  .download-icon {
+    font-size: 1.2em;
+  }
+  
+  .password {
+    margin-left: 8px;
+    background-color: rgba(255,255,255,0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
   }
 </style>

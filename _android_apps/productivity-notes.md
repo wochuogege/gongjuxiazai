@@ -12,7 +12,10 @@ screenshots:
   - /assets/images/productivity-notes-screenshot1.png
   - /assets/images/productivity-notes-screenshot2.png
 system_requirements: Android 6.0及以上版本
-download_link: /downloads/productivity-notes.apk
+baidu_link: https://pan.baidu.com/s/1example-pan-baidu
+baidu_pwd: abc1
+quark_link: https://pan.quark.cn/s/example-pan-quark
+thunder_link: https://pan.xunlei.com/s/example-pan-xunlei
 features:
   - 快速记录笔记和待办事项
   - 支持富文本编辑
