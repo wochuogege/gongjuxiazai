@@ -16,7 +16,7 @@ permalink: /donate/
   <div class="donate-card">
     <h3>微信打赏</h3>
     <div class="qr-code">
-      <img src="https://aini666.vvvv.ee/assets/images/WEIXIN.png">
+      <img src="assets/images/WEIXIN.PNG" alt="微信打赏二维码" style="max-width: 100%; max-height: 100%;">
     </div>
   </div>
   
@@ -24,6 +24,7 @@ permalink: /donate/
     <h3>支付宝打赏</h3>
     <div class="qr-code">
       <p>支付宝扫码支付</p>
+      <p style="font-size: 14px; color: #666; margin-top: 10px;">（请在此处放置支付宝二维码）</p>
     </div>
   </div>
 </div>
@@ -40,27 +41,53 @@ permalink: /donate/
     gap: 40px;
     justify-content: center;
     margin: 40px 0;
+    flex-wrap: wrap;
   }
   
   .donate-card {
     text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 250px;
+  }
+  
+  .donate-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
   }
   
   .qr-code {
     width: 200px;
     height: 200px;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    margin: 15px 0;
+    margin: 15px auto;
+    border: 1px solid #eaeaea;
+    overflow: hidden;
+  }
+  
+  .donate-card h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
   }
   
   @media (max-width: 768px) {
     .donate-methods {
       flex-direction: column;
       align-items: center;
+      gap: 20px;
+    }
+    
+    .donate-card {
+      width: 100%;
+      max-width: 280px;
     }
   }
 </style>
