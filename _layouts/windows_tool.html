@@ -11,6 +11,8 @@ layout: default
         <span class="tool-author">作者：{{ page.author }}</span>
       {% endif %}
     </div>
+  
+  {% include comment_form.html %}
   </header>
   
   {% if page.screenshot %}
@@ -45,7 +47,7 @@ layout: default
   <div class="tool-download">
     <h2>下载链接</h2>
     <div class="download-links">
-      {% if page.baidu_link %}
+        {% if page.baidu_link %}
         <a href="{{ page.baidu_link }}" class="download-button baidu" target="_blank">
           <span class="download-icon">🔗</span>
           <span>百度网盘</span>

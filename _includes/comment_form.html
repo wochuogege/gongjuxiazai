@@ -1,0 +1,248 @@
+<div class="comment-section">
+  <h3>留言区</h3>
+  <form id="comment-form" class="comment-form">
+    <div class="comment-form-group">
+      <label for="comment-name">昵称 *</label>
+      <input type="text" id="comment-name" name="comment-name" placeholder="请输入您的昵称" required>
+    </div>
+    <div class="comment-form-group">
+      <label for="comment-email">邮箱 (选填)</label>
+      <input type="email" id="comment-email" name="comment-email" placeholder="请输入您的邮箱，方便我们回复">
+    </div>
+    <div class="comment-form-group">
+      <label for="comment-content">留言内容 *</label>
+      <textarea id="comment-content" name="comment-content" rows="5" placeholder="请输入您的留言内容..." required></textarea>
+    </div>
+    <div class="comment-form-group">
+      <button type="submit" class="comment-submit-button">提交留言</button>
+    </div>
+  </form>
+  
+  <div id="comment-success" class="comment-success-message" style="display: none;">
+    <p>留言提交成功，感谢您的支持！</p>
+  </div>
+  
+  <div id="comments-container" class="comments-container">
+    <h4>留言列表</h4>
+    <div class="comments-list">
+      <!-- 留言将在这里动态显示 -->
+      <div class="no-comments">暂无留言，快来发表第一条留言吧！</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .comment-section {
+    margin: 40px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .comment-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+  
+  .comment-form {
+    margin-bottom: 30px;
+  }
+  
+  .comment-form-group {
+    margin-bottom: 15px;
+  }
+  
+  .comment-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .comment-form-group input,
+  .comment-form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .comment-form-group input:focus,
+  .comment-form-group textarea:focus {
+    outline: none;
+    border-color: #888;
+  }
+  
+  .comment-submit-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .comment-submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .comment-success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+  
+  .comments-container h4 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  
+  .comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .comment-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .comment-author {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .comment-date {
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .comment-content {
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .no-comments {
+    color: #999;
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+  }
+  
+  @media (max-width: 768px) {
+    .comment-section {
+      padding: 15px;
+    }
+    
+    .comment-form-group input,
+    .comment-form-group textarea {
+      padding: 8px;
+    }
+    
+    .comment-submit-button {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const commentForm = document.getElementById('comment-form');
+    const commentSuccess = document.getElementById('comment-success');
+    const commentsList = document.querySelector('.comments-list');
+    
+    if (commentForm && commentSuccess && commentsList) {
+      commentForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // 获取表单数据
+        const name = document.getElementById('comment-name').value.trim();
+        const email = document.getElementById('comment-email').value.trim();
+        const content = document.getElementById('comment-content').value.trim();
+        
+        if (name && content) {
+          // 创建新留言对象
+          const comment = {
+            name: name,
+            email: email,
+            content: content,
+            date: new Date().toLocaleString('zh-CN')
+          };
+          
+          // 保存到本地存储（实际项目中应该发送到服务器）
+          let comments = JSON.parse(localStorage.getItem('comments')) || [];
+          comments.push(comment);
+          localStorage.setItem('comments', JSON.stringify(comments));
+          
+          // 显示成功消息
+          commentSuccess.style.display = 'block';
+          
+          // 重置表单
+          commentForm.reset();
+          
+          // 更新留言列表
+          updateCommentsList();
+          
+          // 3秒后隐藏成功消息
+          setTimeout(function() {
+            commentSuccess.style.display = 'none';
+          }, 3000);
+        }
+      });
+      
+      // 更新留言列表
+      function updateCommentsList() {
+        let comments = JSON.parse(localStorage.getItem('comments')) || [];
+        
+        if (comments.length > 0) {
+          // 清空列表
+          commentsList.innerHTML = '';
+          
+          // 按时间倒序排列
+          comments.reverse().forEach(function(comment) {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            commentItem.innerHTML = `
+              <div class="comment-header">
+                <span class="comment-author">${escapeHTML(comment.name)}</span>
+                <span class="comment-date">${comment.date}</span>
+              </div>
+              <div class="comment-content">${escapeHTML(comment.content).replace(/\n/g, '<br>')}</div>
+            `;
+            commentsList.appendChild(commentItem);
+          });
+        } else {
+          commentsList.innerHTML = '<div class="no-comments">暂无留言，快来发表第一条留言吧！</div>';
+        }
+      }
+      
+      // HTML转义函数，防止XSS攻击
+      function escapeHTML(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+      
+      // 页面加载时更新留言列表
+      updateCommentsList();
+    }
+  });
+</script>

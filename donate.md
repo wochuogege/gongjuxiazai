@@ -35,6 +35,8 @@ permalink: /donate/
 2. 打赏后可在下方留言，我们会尽快回复
 3. 所有打赏将用于网站维护和内容更新
 
+{% include comment_form.html %}
+
 <style>
   .donate-methods {
     display: flex;

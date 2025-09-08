@@ -5,13 +5,220 @@
       <span class="bar"></span>
       <span class="bar"></span>
     </div>
-    <ul class="nav-menu">
-      <li><a href="{{ site.baseurl }}/">首页</a></li>
-      <li><a href="{{ site.baseurl }}/windows-tools/">windows工具</a></li>
-      <li><a href="{{ site.baseurl }}/android-apps/">安卓APP</a></li>
-      <li><a href="{{ site.baseurl }}/about-us/">关于我们</a></li>
-      <li><a href="{{ site.baseurl }}/donate/">打赏作者</a></li>
-      <li><a href="{{ site.baseurl }}/sitemap.xml" target="_blank">网站地图</a></li>
-    </ul>
+    <div class="nav-content">
+      <ul class="nav-menu">
+        <li><a href="{{ site.baseurl }}/">首页</a></li>
+        <li><a href="{{ site.baseurl }}/windows-tools/">windows工具</a></li>
+        <li><a href="{{ site.baseurl }}/android-apps/">安卓APP</a></li>
+        <li><a href="{{ site.baseurl }}/about-us/">关于我们</a></li>
+        <li><a href="{{ site.baseurl }}/donate/">打赏作者</a></li>
+        <li><a href="{{ site.baseurl }}/sitemap.xml" target="_blank">网站地图</a></li>
+      </ul>
+      <div class="nav-search">
+        <form action="" method="get" id="search-form">
+          <input type="text" id="search-input" placeholder="搜索工具..." autocomplete="off">
+          <button type="submit" id="search-button">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </nav>
+
+<style>
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+  }
+  
+  .nav-menu li {
+    margin-right: 20px;
+  }
+  
+  .nav-menu li:last-child {
+    margin-right: 0;
+  }
+  
+  .nav-menu a {
+    text-decoration: none;
+    color: #333;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-menu a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .nav-search {
+    display: flex;
+    align-items: center;
+  }
+  
+  #search-form {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  #search-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+    width: 200px;
+    transition: width 0.3s ease;
+  }
+  
+  #search-input:focus {
+    width: 250px;
+    border-color: #888;
+  }
+  
+  #search-button {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #search-button:hover {
+    color: #333;
+  }
+  
+  .nav-toggle {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+  }
+  
+  .nav-toggle .bar {
+    height: 3px;
+    width: 100%;
+    background-color: #333;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+    
+    .nav-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .nav-content.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .nav-menu {
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .nav-menu li {
+      margin: 10px 0;
+    }
+    
+    .nav-search {
+      width: 100%;
+      max-width: 300px;
+      padding: 0 20px;
+    }
+    
+    #search-input {
+      width: 100%;
+    }
+    
+    #search-input:focus {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // 移动端导航切换
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+    const navContent = document.querySelector('.nav-content');
+    
+    if (mobileNavToggle && navContent) {
+      mobileNavToggle.addEventListener('click', function() {
+        navContent.classList.toggle('active');
+      });
+    }
+    
+    // 搜索功能
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    
+    if (searchForm && searchInput) {
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (searchTerm) {
+          // 这里可以添加实际的搜索逻辑
+          // 目前只是在控制台显示搜索词
+          console.log('搜索内容:', searchTerm);
+          
+          // 示例：可以根据搜索词跳转到不同的页面
+          if (searchTerm.includes('windows')) {
+            window.location.href = '{{ site.baseurl }}/windows-tools/';
+          } else if (searchTerm.includes('安卓') || searchTerm.includes('android')) {
+            window.location.href = '{{ site.baseurl }}/android-apps/';
+          }
+          // 实际项目中可以根据需要实现更复杂的搜索逻辑
+        }
+      });
+    }
+  });
+</script>
