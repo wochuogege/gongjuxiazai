@@ -1,0 +1,115 @@
+---
+layout: default
+---
+
+<div class="tool-article">
+  <header class="tool-header">
+    <h1>{{ page.title }}</h1>
+    <div class="tool-meta">
+      <span class="tool-date">发布时间：{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.author %}
+        <span class="tool-author">作者：{{ page.author }}</span>
+      {% endif %}
+    </div>
+  </header>
+  
+  {% if page.screenshot %}
+    <div class="tool-screenshot">
+      <img src="{{ page.screenshot }}" alt="{{ page.title }} 截图">
+    </div>
+  {% endif %}
+  
+  <div class="tool-description">
+    <h2>软件介绍</h2>
+    {{ content }}
+  </div>
+  
+  {% if page.features %}
+    <div class="tool-features">
+      <h2>主要功能</h2>
+      <ul>
+        {% for feature in page.features %}
+          <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
+  {% if page.system_requirements %}
+    <div class="tool-requirements">
+      <h2>系统要求</h2>
+      <p>{{ page.system_requirements }}</p>
+    </div>
+  {% endif %}
+  
+  {% if page.download_link %}
+    <div class="tool-download">
+      <a href="{{ page.download_link }}" class="download-button">立即下载</a>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .tool-article {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .tool-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .tool-meta {
+    display: flex;
+    gap: 20px;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .tool-screenshot {
+    margin: 30px 0;
+    text-align: center;
+  }
+  
+  .tool-screenshot img {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .tool-description,
+  .tool-features,
+  .tool-requirements {
+    margin-bottom: 30px;
+  }
+  
+  .tool-features ul {
+    padding-left: 20px;
+  }
+  
+  .tool-features li {
+    margin-bottom: 8px;
+  }
+  
+  .tool-download {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .download-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0366d6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #0256c1;
+  }
+</style>

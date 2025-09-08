@@ -1,0 +1,172 @@
+---
+layout: default
+---
+
+<div class="app-article">
+  <header class="app-header">
+    <h1>{{ page.title }}</h1>
+    <div class="app-meta">
+      <span class="app-date">发布时间：{{ page.date | date: "%Y年%m月%d日" }}</span>
+      {% if page.author %}
+        <span class="app-author">作者：{{ page.author }}</span>
+      {% endif %}
+    </div>
+  </header>
+  
+  <div class="app-info">
+    {% if page.icon %}
+      <div class="app-icon">
+        <img src="{{ page.icon }}" alt="{{ page.title }} 图标">
+      </div>
+    {% endif %}
+    
+    <div class="app-details">
+      {% if page.version %}
+        <p><strong>版本：</strong>{{ page.version }}</p>
+      {% endif %}
+      {% if page.size %}
+        <p><strong>大小：</strong>{{ page.size }}</p>
+      {% endif %}
+      {% if page.developer %}
+        <p><strong>开发者：</strong>{{ page.developer }}</p>
+      {% endif %}
+    </div>
+  </div>
+  
+  {% if page.screenshots %}
+    <div class="app-screenshots">
+      <h3>应用截图</h3>
+      <div class="screenshot-gallery">
+        {% for screenshot in page.screenshots %}
+          <img src="{{ screenshot }}" alt="{{ page.title }} 截图">
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+  
+  <div class="app-description">
+    <h2>应用介绍</h2>
+    {{ content }}
+  </div>
+  
+  {% if page.features %}
+    <div class="app-features">
+      <h2>主要功能</h2>
+      <ul>
+        {% for feature in page.features %}
+          <li>{{ feature }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
+  {% if page.system_requirements %}
+    <div class="app-requirements">
+      <h2>系统要求</h2>
+      <p>{{ page.system_requirements }}</p>
+    </div>
+  {% endif %}
+  
+  {% if page.download_link %}
+    <div class="app-download">
+      <a href="{{ page.download_link }}" class="download-button">立即下载</a>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .app-article {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .app-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .app-meta {
+    display: flex;
+    gap: 20px;
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .app-info {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .app-icon img {
+    width: 80px;
+    height: 80px;
+    border-radius: 16px;
+  }
+  
+  .app-details p {
+    margin: 5px 0;
+  }
+  
+  .app-screenshots {
+    margin: 30px 0;
+  }
+  
+  .screenshot-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .screenshot-gallery img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .app-description,
+  .app-features,
+  .app-requirements {
+    margin-bottom: 30px;
+  }
+  
+  .app-features ul {
+    padding-left: 20px;
+  }
+  
+  .app-features li {
+    margin-bottom: 8px;
+  }
+  
+  .app-download {
+    text-align: center;
+    margin: 40px 0;
+  }
+  
+  .download-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #0366d6;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-button:hover {
+    background-color: #0256c1;
+  }
+  
+  @media (max-width: 768px) {
+    .app-info {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>

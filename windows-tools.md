@@ -8,52 +8,73 @@ permalink: /windows-tools/
 
 这里提供各种实用的Windows工具和软件，帮助您提高工作效率和电脑使用体验。
 
-## 常用工具分类
+## 所有工具
 
-<div class="tool-categories">
-  <div class="category-card">
-    <h3>系统优化</h3>
-    <p>各种系统优化、清理和加速工具，让您的电脑运行更加流畅。</p>
-  </div>
-  
-  <div class="category-card">
-    <h3>办公软件</h3>
-    <p>高效的办公软件，提升您的工作效率和文档处理能力。</p>
-  </div>
-  
-  <div class="category-card">
-    <h3>安全防护</h3>
-    <p>杀毒软件、防火墙和安全工具，保护您的电脑和数据安全。</p>
-  </div>
-  
-  <div class="category-card">
-    <h3>多媒体工具</h3>
-    <p>音频、视频编辑和播放工具，满足您的多媒体需求。</p>
-  </div>
+<div class="tool-list">
+  {% assign sorted_tools = site.windows_tools | sort: 'date' | reverse %}
+  {% if sorted_tools.size > 0 %}
+    {% for tool in sorted_tools %}
+      <div class="tool-item">
+        <h3><a href="{{ tool.url }}">{{ tool.title }}</a></h3>
+        <div class="tool-meta">
+          <span class="tool-date">{{ tool.date | date: "%Y年%m月%d日" }}</span>
+        </div>
+        <div class="tool-excerpt">
+          {{ tool.content | strip_html | truncate: 150 }}
+        </div>
+        <a href="{{ tool.url }}" class="read-more">查看详情 →</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="no-content">暂无工具内容，请在 _windows_tools 目录下添加工具介绍文章。</p>
+  {% endif %}
 </div>
 
 <style>
-  .tool-categories {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+  .tool-list {
     margin-top: 30px;
   }
   
-  .category-card {
+  .tool-item {
     background-color: #f9f9f9;
     border-radius: 8px;
     padding: 20px;
+    margin-bottom: 20px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .category-card:hover {
-    transform: translateY(-5px);
+  .tool-item:hover {
+    transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
   
-  .category-card h3 {
+  .tool-item h3 {
     margin-top: 0;
+  }
+  
+  .tool-meta {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  
+  .tool-excerpt {
+    margin-bottom: 15px;
+  }
+  
+  .read-more {
     color: #0366d6;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  .no-content {
+    text-align: center;
+    padding: 40px;
+    color: #666;
   }
 </style>
