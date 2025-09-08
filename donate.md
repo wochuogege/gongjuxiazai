@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 打赏作者
+title: 打赏老铁
 permalink: /donate/
 ---
 
