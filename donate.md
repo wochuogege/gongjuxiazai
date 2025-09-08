@@ -32,10 +32,7 @@ permalink: /donate/
 ## 打赏说明
 
 1. 打赏金额随意，多少都是您的一片心意
-2. 打赏后可在下方留言，我们会尽快回复
-3. 所有打赏将用于网站维护和内容更新
-
-{% include comment_form.html %}
+2. 所有打赏将用于网站维护和内容更新
 
 <style>
   .donate-methods {
