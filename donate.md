@@ -16,7 +16,7 @@ permalink: /donate/
   <div class="donate-card">
     <h3>微信打赏</h3>
     <div class="qr-code">
-      <img src="assets/images/weixin.png" alt="微信打赏二维码" style="max-width: 100%; max-height: 100%;">
+      <img src="/assets/images/weixin.png" alt="微信打赏二维码" style="max-width: 100%; max-height: 100%;">
     </div>
   </div>
   
