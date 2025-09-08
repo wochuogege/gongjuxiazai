@@ -15,8 +15,8 @@
         <li><a href="{{ site.baseurl }}/sitemap.xml" target="_blank">网站地图</a></li>
       </ul>
       <div class="nav-search">
-        <form action="" method="get" id="search-form">
-          <input type="text" id="search-input" placeholder="搜索工具..." autocomplete="off">
+        <form action="{{ site.baseurl }}/search/" method="get" id="search-form">
+          <input type="text" id="search-input" name="q" placeholder="搜索工具..." autocomplete="off">
           <button type="submit" id="search-button">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -198,27 +198,17 @@
     
     // 搜索功能
     const searchForm = document.getElementById('search-form');
-    const searchInput = document.getElementById('search-input');
     
-    if (searchForm && searchInput) {
-      searchForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        
-        if (searchTerm) {
-          // 这里可以添加实际的搜索逻辑
-          // 目前只是在控制台显示搜索词
-          console.log('搜索内容:', searchTerm);
-          
-          // 示例：可以根据搜索词跳转到不同的页面
-          if (searchTerm.includes('windows')) {
-            window.location.href = '{{ site.baseurl }}/windows-tools/';
-          } else if (searchTerm.includes('安卓') || searchTerm.includes('android')) {
-            window.location.href = '{{ site.baseurl }}/android-apps/';
-          }
-          // 实际项目中可以根据需要实现更复杂的搜索逻辑
-        }
-      });
+    if (searchForm) {
+      // 设置搜索表单的提交地址
+      searchForm.action = '{{ site.baseurl }}/search/';
+      searchForm.method = 'get';
+      
+      // 确保搜索输入框有正确的name属性
+      const searchInput = document.getElementById('search-input');
+      if (searchInput && !searchInput.hasAttribute('name')) {
+        searchInput.setAttribute('name', 'q');
+      }
     }
   });
 </script>
