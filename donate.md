@@ -60,17 +60,26 @@ permalink: /donate/
   }
   
   .qr-code {
-    width: 200px;
-    height: 200px;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    margin: 15px auto;
-    border: 1px solid #eaeaea;
-    overflow: hidden;
-  }
+      width: 200px;
+      height: 200px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      margin: 15px auto;
+      border: 1px solid #eaeaea;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .qr-code img {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+      object-fit: contain;
+    }
   
   .donate-card h3 {
     color: #333;
