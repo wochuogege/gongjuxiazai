@@ -16,7 +16,7 @@ permalink: /donate/
   <div class="donate-card">
     <h3>微信打赏</h3>
     <div class="qr-code">
-      <img src="https://aini666.vvvv.ee/assets/images/WEIXIN.PNG">
+      <img src="https://aini666.vvvv.ee/assets/images/WEIXIN.png">
     </div>
   </div>
   
