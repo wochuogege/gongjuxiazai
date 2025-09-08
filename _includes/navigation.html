@@ -1,10 +1,13 @@
 <nav>
   <ul>
+    <li><a href="{{ site.baseurl }}/">首页</a></li>
+    <li><a href="{{ site.baseurl }}/_categories/">所有栏目</a></li>
+    <li><a href="{{ site.baseurl }}/_tags/">所有标签</a></li>
+    
+    <li class="nav-divider">|</li>
+    
     {% for category in site.categories %}
-      <li><a href="/categories/{{ category | first | slugify }}/">{{ category | first }} ({{ category | last.size }})</a></li>
-    {% endfor %}
-    {% for tag in site.tags %}
-      <li><a href="/tags/{{ tag | first | slugify }}/">{{ tag | first }} ({{ tag | last.size }})</a></li>
+      <li><a href="{{ site.baseurl }}/categories/{{ category | first | slugify }}/">{{ category | first }}</a></li>
     {% endfor %}
   </ul>
 </nav>

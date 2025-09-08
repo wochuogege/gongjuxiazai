@@ -1,0 +1,28 @@
+---
+layout: default
+title: 所有栏目
+---
+
+<div class="categories-index">
+  <h1>所有栏目</h1>
+  
+  <div class="category-grid">
+    {% for category in site.categories %}
+      <div class="category-card">
+        <h2><a href="{{ site.baseurl }}/categories/{{ category | first | slugify }}/">{{ category | first }}</a></h2>
+        <p class="category-count">{{ category | last.size }} 篇文章</p>
+        
+        {% assign sorted_posts = category[1] | sort: 'date' | reverse | slice: 0, 3 %}
+        <ul class="category-recent-posts">
+          {% for post in sorted_posts %}
+            <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+  
+  {% if site.categories.size == 0 %}
+    <p>暂无栏目内容，请在文章的 Front Matter 中添加 categories 字段来创建栏目。</p>
+  {% endif %}
+</div>

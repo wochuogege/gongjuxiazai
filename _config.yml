@@ -1,6 +1,14 @@
 # _config.yml
 title: 我的 Markdown 网站
-description: 一个由 GitHub Actions 自动部署的静态网站。
+description: 一个由 GitHub Actions 自动部署的静态网站，包含多个栏目和丰富的内容。
+
+# 网站配置
+baseurl: "" # 网站的子路径，如果没有则为空
+url: "https://aini666.vvvv.ee" # 你的网站URL
+timezone: Asia/Shanghai # 设置时区为上海
+
+# 永久链接格式
+permalink: /posts/:year/:month/:day/:title/
 
 # 定义分类和标签的链接格式
 collections:
@@ -10,3 +18,34 @@ collections:
   tags:
     output: true
     permalink: /tags/:path/
+
+# 分页配置
+paginate: 10
+paginate_path: "/page:num/"
+
+# 插件配置
+gems:
+  - jekyll-paginate
+
+# 安全设置
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# 保持文件编码为UTF-8
+encoding: "utf-8"
+
+# 搜索设置
+include:
+  - .nojekyll
+  - .gitignore
+  - .travis.yml
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md

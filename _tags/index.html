@@ -1,0 +1,31 @@
+---
+layout: default
+title: 所有标签
+---
+
+<div class="tags-index">
+  <h1>所有标签</h1>
+  
+  <div class="tag-cloud">
+    {% for tag in site.tags %}
+      {% assign tag_size = tag[1].size %}
+      {% assign max_size = 0 %}
+      {% for t in site.tags %}
+        {% if t[1].size > max_size %}
+          {% assign max_size = t[1].size %}
+        {% endif %}
+      {% endfor %}
+      {% assign font_size = tag_size | times: 100 | divided_by: max_size %}
+      {% if font_size < 50 %}
+        {% assign font_size = 50 %}
+      {% endif %}
+      <a href="{{ site.baseurl }}/tags/{{ tag | first | slugify }}/" style="font-size: {{ font_size }}%;">
+        {{ tag | first }} ({{ tag | last.size }})
+      </a>
+    {% endfor %}
+  </div>
+  
+  {% if site.tags.size == 0 %}
+    <p>暂无标签内容，请在文章的 Front Matter 中添加 tags 字段来创建标签。</p>
+  {% endif %}
+</div>
