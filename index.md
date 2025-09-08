@@ -1,41 +1,15 @@
 ---
 layout: default
-title: 网站首页
+title: 首页
 ---
 
-# 欢迎来到我的网站！
+# 欢迎访问我们的网站
 
-这是一个由 Jekyll 和 GitHub Actions 自动生成的网站，包含多个栏目和丰富的内容。
+这里是一个专注于提供Windows工具和安卓APP下载的平台，我们致力于为用户提供优质、安全、实用的软件资源。
 
-## 各栏目最新内容
+## 快速导航
 
-{% for category in site.categories %}
-  {% assign category_name = category | first %}
-  {% assign category_posts = category | last %}
-  
-  <section class="category-latest">
-    {% assign category_str = category_name | stringify | remove: '"' %}
-    <h2><a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">{{ category_str }}</a></h2>
-    
-    <div class="post-list">
-      {% assign sorted_posts = category_posts | sort: 'date' | reverse | slice: 0, 5 %}
-      {% for post in sorted_posts %}
-        <div class="post-item">
-          <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-          <p class="post-date">{{ post.date | date: "%Y年%m月%d日" }}</p>
-          <div class="post-excerpt">{{ post.excerpt | strip_html | truncate: 100 }}</div>
-        </div>
-      {% endfor %}
-    </div>
-    
-    {% if category_posts.size > 5 %}
-      <div class="view-more">
-        <a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">查看更多 {{ category_str }} 文章 →</a>
-      </div>
-    {% endif %}
-  </section>
-{% endfor %}
-
-{% if site.categories.size == 0 %}
-  <p>暂无文章内容，请添加文章到 _posts 目录下。</p>
-{% endif %}
+- [Windows工具](/windows-tools/) - 各种实用的Windows软件和工具
+- [安卓APP](/android-apps/) - 精选的安卓应用程序
+- [关于我们](/about-us/) - 了解我们的团队和使命
+- [打赏作者](/donate/) - 支持我们继续提供优质内容

@@ -1,6 +1,6 @@
 # _config.yml
-title: 我的 Markdown 网站
-description: 一个由 GitHub Actions 自动部署的静态网站，包含多个栏目和丰富的内容。
+title: 工具下载平台
+description: 提供Windows工具和安卓APP下载的平台，致力于为用户提供优质、安全、实用的软件资源。
 
 # 网站配置
 baseurl: "" # 网站的子路径，如果没有则为空

@@ -1,15 +1,16 @@
 <nav>
-  <ul>
-    <li><a href="{{ site.baseurl }}/">首页</a></li>
-    <li><a href="{{ site.baseurl }}/categories/">所有栏目</a></li>
-    <li><a href="{{ site.baseurl }}/tags/">所有标签</a></li>
-    
-    <li class="nav-divider">|</li>
-    
-    {% for category in site.categories %}
-        {% assign category_name = category | first %}
-        {% assign category_str = category_name | stringify | remove: '"' %}
-        <li><a href="{{ site.baseurl }}/category/{{ category_str | slugify }}">{{ category_str }}</a></li>
-      {% endfor %}
-  </ul>
+  <div class="nav-container">
+    <div class="nav-toggle" id="mobile-nav-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <ul class="nav-menu">
+      <li><a href="{{ site.baseurl }}/">首页</a></li>
+      <li><a href="{{ site.baseurl }}/windows-tools/">windows工具</a></li>
+      <li><a href="{{ site.baseurl }}/android-apps/">安卓APP</a></li>
+      <li><a href="{{ site.baseurl }}/about-us/">关于我们</a></li>
+      <li><a href="{{ site.baseurl }}/donate/">打赏作者</a></li>
+    </ul>
+  </div>
 </nav>
