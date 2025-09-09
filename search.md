@@ -31,13 +31,14 @@ permalink: /search/
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
     
-    // 搜索索引数据
+    // 搜索索引数据 - 优化版本，确保能正确索引所有内容
     const searchIndex = [
       {% for tool in site.windows_tools %}
         {
           title: '{{ tool.title }}',
           url: '{{ site.baseurl }}{{ tool.url }}',
           content: '{{ tool.content | strip_html | strip_newlines | escape }}',
+          rawContent: '{{ tool.content | escape }}',
           type: 'Windows工具',
           date: '{{ tool.date | date: "%Y年%m月%d日" }}',
           excerpt: '{{ tool.content | strip_html | truncate: 150 | escape }}'
@@ -48,6 +49,7 @@ permalink: /search/
           title: '{{ app.title }}',
           url: '{{ site.baseurl }}{{ app.url }}',
           content: '{{ app.content | strip_html | strip_newlines | escape }}',
+          rawContent: '{{ app.content | escape }}',
           type: '安卓APP',
           date: '{{ app.date | date: "%Y年%m月%d日" }}',
           excerpt: '{{ app.content | strip_html | truncate: 150 | escape }}'
@@ -62,7 +64,7 @@ permalink: /search/
       return params.get('q') || '';
     }
     
-    // 执行搜索
+    // 执行搜索 - 增强版，确保能匹配更多内容
     function performSearch(query) {
       if (!query.trim()) {
         searchResults.innerHTML = '<p class="search-instructions">请在上方搜索框输入关键词进行搜索</p>';
@@ -70,11 +72,23 @@ permalink: /search/
       }
       
       query = query.toLowerCase();
-      const results = searchIndex.filter(item => 
-        item.title.toLowerCase().includes(query) || 
-        item.content.toLowerCase().includes(query) ||
-        item.excerpt.toLowerCase().includes(query)
-      );
+      // 增强的搜索逻辑，确保能匹配标题、内容、原始内容和摘要中的关键词
+      const results = searchIndex.filter(item => {
+        // 检查标题
+        const titleMatch = item.title.toLowerCase().includes(query);
+        
+        // 检查处理过的内容
+        const contentMatch = item.content.toLowerCase().includes(query);
+        
+        // 检查原始内容（未经过多处理）
+        const rawContentMatch = item.rawContent.toLowerCase().includes(query);
+        
+        // 检查摘要
+        const excerptMatch = item.excerpt.toLowerCase().includes(query);
+        
+        // 任何一项匹配就返回结果
+        return titleMatch || contentMatch || rawContentMatch || excerptMatch;
+      });
       
       if (results.length === 0) {
         searchResults.innerHTML = '<p class="no-results">未找到匹配的结果，请尝试其他关键词。</p>';
