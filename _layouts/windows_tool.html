@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="tool-article">
-  <header class="tool-header">
+  <div class="tool-header">
     <h1>{{ page.title }}</h1>
     <div class="tool-meta">
       <span class="tool-date">发布时间：{{ page.date | date: "%Y年%m月%d日" }}</span>
@@ -11,7 +11,7 @@ layout: default
         <span class="tool-author">作者：{{ page.author }}</span>
       {% endif %}
     </div>
-  </header>
+  </div>
   
   {% if page.screenshot %}
     <div class="tool-screenshot">
